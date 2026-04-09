@@ -8,14 +8,16 @@ public class Main {
         CreditCard card = new CreditCard();
         List<Products> products = new ArrayList<>();
 
+        System.out.println("What is the Limite of card: ");
+        int limit = scanner.nextInt();
+        card.setLimit(limit);
+
         int count = 1;
         while (count != 0) {
             Products newProduct = new Products();
 
+            int counting = 1;
             if (counting == 1) {
-                System.out.println("What is the Limite of card: ");
-                int limit = scanner.nextInt();
-                card.setLimit(limit);
 
                 System.out.println("What is the description of product: ");
                 String description = scanner.nextLine();
@@ -23,15 +25,17 @@ public class Main {
 
                 System.out.println("What is the price of product: ");
                 int price = scanner.nextInt();
+
+                if (price <= card.getLimit()) {
+                    newProduct.setPrice(price);
+                } else {
+                    System.out.println("Price of product is bigger than your limit");
+                }
             }
 
-            if (price < card.getLimit()) {
-                newProduct.setPrice(price);
-            }
-
-            int counting;
             System.out.println("Type 0 to exit or 1 to continue");
             counting = scanner.nextInt();
+            count = counting;
         }
 
     }
